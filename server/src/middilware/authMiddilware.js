@@ -7,7 +7,7 @@ import jwt from 'jsonwebtoken'
         return res.status(204).json({message:"Token not found"})
     }
     const decoded = jwt.verify(token,process.env.JWT_SECRET)
-    const user = await userModel.findById(decoded.userId)
+     const user = await userModel.findById(decoded.id);
     req.user=user
     next()
     

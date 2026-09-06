@@ -1,6 +1,11 @@
 import { useState } from "react"
+import { useNavigate } from "react-router-dom"
+import { useAuth } from "../hooks/useAuth";
+
 
 const Register = () => {
+    const navigate = useNavigate()
+    const {register} = useAuth()
     const [form, setform] = useState({
         username: "",
         password: ""
@@ -13,9 +18,15 @@ const Register = () => {
         })
         
     }
-    const handelSubmit = (e)=>{
+    const handelSubmit = async (e)=>{
         e.preventDefault()
-        console.log(form)
+        try{
+           await register(form)
+            navigate('/')
+        }catch(err){
+            console.log(err);
+            
+        }
     }
 
   return (
@@ -25,9 +36,9 @@ const Register = () => {
             <span className="block text-white">Username</span>
             <input className="border-white mb-2 border rounded p-2 text-white outline-none" type="text" placeholder="Enter Username" name="username" onChange={handelChange} />
             <span className="block text-white">Password</span>
-            <input className="border-white mb-2 block border rounded p-2 text-white outline-none" type="text" placeholder="Enter Password" name="password" onChange={handelChange} />
+            <input className="border-white mb-2 block border rounded p-2 text-white outline-none" type="password" placeholder="Enter Password" name="password" onChange={handelChange} />
             <button type="submit" className="  mt-2  border py-2 px-4 rounded text-white bg-zinc-500">Register</button>
-            <a className="text-blue-700 ml-4 " href="">Login</a>
+            <a className="text-blue-700 ml-4 " href="/login">Login</a>
         </form>
         
 

@@ -23,6 +23,7 @@ async function registerUser(req,res){
 
 async function loginUser(req,res){
     try{
+        console.log("LOGIN BODY:", req.body);
         const {username,password}=req.body
         const user = await userModel.findOne({username}).select("+password")
         if(!user){
@@ -36,7 +37,7 @@ async function loginUser(req,res){
         res.cookie("token",token,{httpOnly:true})
         res.status(201).json({
             message:"user login succssfully",
-            user
+            newUser:user
         })
     } catch(err){
         console.log("Error in login controller",err)
@@ -69,13 +70,14 @@ async function updatedUser(req,res){
         })
     }
 }
-async function logoutUser(req,res) {
-    try{
-        res.clearCookie("token");
-       return res.status(200).json({message:"User Logout succsefully"})
-    }catch(err){
-        return res.status(500).json({message:"Error in logout Controller",error:err.message})
-    }
-    
+
+async function profile(req, res) {
+
+    const {user} = req.user;
+
+    res.status(200).json({
+        message: "Profile fetched successfully",
+        user
+    });
 }
-export {registerUser,loginUser,updatedUser,logoutUser}
+export {registerUser,loginUser,updatedUser,profile}
