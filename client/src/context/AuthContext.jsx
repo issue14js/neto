@@ -6,7 +6,7 @@ import axios from 'axios'
 export const AuthContext = createContext()
 
 export function AuthProvider({children}){
-    const [user, setUser] = useState('')
+    const [user, setUser] = useState(null)
     const [loding, setLoding] = useState(true)
     const rooturl = 'http://localhost:3000'
     const register = async (formData)=>{
@@ -35,7 +35,7 @@ export function AuthProvider({children}){
     }
     const logout = ()=>{
         localStorage.removeItem('token')
-        setUser('')
+        setUser(null)
 
 
     }
@@ -43,6 +43,7 @@ export function AuthProvider({children}){
         try{
             const res = await axios.get(`${rooturl}/api/auth/profile`)
             setUser(res.data.user)
+            console.log(res.data.user)
             return res.data
         }catch(err){
             console.log(err)

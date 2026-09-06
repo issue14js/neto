@@ -22,7 +22,7 @@ const Register = () => {
         e.preventDefault()
         try{
            await register(form)
-            navigate('/')
+            navigate('/dashboard')
         }catch(err){
             console.log(err);
             
