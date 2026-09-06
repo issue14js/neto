@@ -23,7 +23,6 @@ async function registerUser(req,res){
 
 async function loginUser(req,res){
     try{
-        console.log("LOGIN BODY:", req.body);
         const {username,password}=req.body
         const user = await userModel.findOne({username}).select("+password")
         if(!user){

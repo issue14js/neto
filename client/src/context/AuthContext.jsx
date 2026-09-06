@@ -41,7 +41,11 @@ export function AuthProvider({children}){
     }
     const profile = async ()=>{
         try{
-            const res = await axios.get(`${rooturl}/api/auth/profile`)
+            const res = await axios.get(`${rooturl}/api/auth/profile`,
+                   {
+                withCredentials: true
+            }
+            )
             setUser(res.data.user)
             console.log(res.data.user)
             return res.data
