@@ -3,6 +3,7 @@ import React from "react";
 import { useAuth } from "../hooks/useAuth";
 import { useNavigate } from "react-router-dom";
 import { useTheme } from "../hooks/useTheme";
+import Banner from "./Banner";
 const Dashboard = () => {
     const { user, logout, profile } = useAuth();
     const {theme,changeTheme} = useTheme()
@@ -67,22 +68,26 @@ const Dashboard = () => {
 
 
             {/* Main Content */}
-            <main className="col-span-6 grid min-h-0 grid-rows-[30%_70%] gap-2">
+            <main className="col-span-6 grid min-h-0 grid-rows-[40%_60%] gap-2">
 
                 {/* Top Section */}
-                <section className="grid min-h-0 grid-rows-[30%_70%] rounded-xl border border-zinc-800">
+                <section className="grid min-h- grid-rows-[30%_70%] rounded-xl border border-zinc-800">
 
                     {/* Navbar */}
                     <div className="grid grid-cols-7 items-center gap-3 px-8">
 
                         {/* Search */}
-                        <div className="col-span-4 h-10">
-                            <input
-                                type="search"
-                                placeholder="Search..."
-                                className="h-full w-full rounded-lg border border-zinc-700 bg-zinc-900 px-4 outline-none "
-                            />
-                        </div>
+                       <div className="col-span-4 h-10">
+    <input
+        type="search"
+        placeholder="Search..."
+        className={`h-full w-full rounded-lg border px-4 outline-none transition-colors duration-300 ${
+            theme === "light"
+                ? "border-zinc-300 bg-white text-zinc-900 placeholder:text-zinc-400"
+                : "border-zinc-700 bg-zinc-900 text-white placeholder:text-zinc-500"
+        }`}
+    />
+</div>
 
                         {/* User */}
                         <div className="col-span-2 flex items-center justify-end gap-2">
@@ -111,7 +116,7 @@ const Dashboard = () => {
                     <div className="p-4">
 
                         <div className="h-full w-full rounded-xl border ">
-                            {/* Hero Content */}
+                            <Banner />
                         </div>
 
                     </div>
