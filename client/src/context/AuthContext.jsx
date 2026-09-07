@@ -1,5 +1,6 @@
 import {createContext, useState, } from "react"
 import axios from 'axios'
+import { rooturl } from "../config/api.js";
 
 
 
@@ -8,7 +9,6 @@ export const AuthContext = createContext()
 export function AuthProvider({children}){
     const [user, setUser] = useState(null)
     const [loding, setLoding] = useState(true)
-    const rooturl = 'http://localhost:3000'
     const register = async (formData)=>{
         try{
            const res = await axios.post(`${rooturl}/api/auth/register`,formData)

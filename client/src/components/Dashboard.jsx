@@ -4,9 +4,12 @@ import { useAuth } from "../hooks/useAuth";
 import { useNavigate } from "react-router-dom";
 import { useTheme } from "../hooks/useTheme";
 import Banner from "./Banner";
+import NoteForm from "./NoteForm";
+import { useState } from "react";
 const Dashboard = () => {
     const { user, logout, profile } = useAuth();
     const {theme,changeTheme} = useTheme()
+    const [showCreateNote, setShowCreateNote] = useState(false);
     
     const navigate = useNavigate();
 
@@ -28,7 +31,12 @@ const Dashboard = () => {
     }
 
     return (
-        <div className={`grid h-screen w-full grid-cols-7 gap-2 ${theme==='light'?"bg-white text-black":"bg-black text-white"} p-2 `}>
+        <div className={`grid relative h-screen w-full grid-cols-7 gap-2 ${theme==='light'?"bg-white text-black":"bg-black text-white"} p-2 `}>
+             {showCreateNote && (
+                <NoteForm
+                    onClose={() => setShowCreateNote(false)}
+                />
+            )}
 
             {/* Sidebar */}
             <aside className="col-span-1 rounded-xl border p-3">
@@ -131,12 +139,13 @@ const Dashboard = () => {
                     <div className="col-span-3 grid min-h-0 grid-rows-2 gap-2">
 
                         <div  className="py-2 px-4 rounded-xl border">
-                            Templates
+                            <span>Template</span>
                         </div>
 
-                        <div className="py-2 px-4 rounded-xl border">
-                           Notes
-                        </div>
+                        <div className="py-2 px-4 flex  justify-between rounded-xl border">
+                          <span>Note</span>
+                          <button onClick={()=>setShowCreateNote(true)} className=" bg-amber-400 cursor-pointer  border h-6 rounded-2xl px-2 text-sm items-center">Create +</button>
+                        </div> 
 
                     </div>
 

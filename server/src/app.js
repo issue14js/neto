@@ -1,5 +1,6 @@
 import express from "express";
 import authRoute from "./route/authRoute.js"
+import noteRoute from "./route/noteRoute.js"
 import cookieParser from "cookie-parser";
 import cors from "cors";
 
@@ -15,6 +16,7 @@ app.use(cors({
 }));
 app.use(cookieParser());
 app.use("/api/auth",authRoute)
+app.use("/api/note",noteRoute)
 cors
 
 
