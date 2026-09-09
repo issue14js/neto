@@ -15,7 +15,7 @@ async function registerUser(req,res){
         const newUser = await userModel.create({username,password:haspass,name})
         const token = jwt.sign({id:newUser._id}, process.env.JWT_SECRET,{expiresIn:"5h"})
         res.cookie("token",token,{httpOnly:true})
-        res.status(201).json({message:"user created successfully",newUser})
+        return res.status(201).json({message:"user created successfully",newUser})
     } catch(err){
         console.log("error in register controller",err)
     }
@@ -34,7 +34,7 @@ async function loginUser(req,res){
         }
         const token = jwt.sign({id:user._id}, process.env.JWT_SECRET,{expiresIn:"5h"})
         res.cookie("token",token,{httpOnly:true})
-        res.status(201).json({
+       return res.status(201).json({
             message:"user login succssfully",
             newUser:user
         })
@@ -79,4 +79,18 @@ async function profile(req, res) {
         user
     });
 }
-export {registerUser,loginUser,updatedUser,profile}
+async function logout (req,res) {
+    try{
+        res.clearCookie("token",{
+            httpOnly:true   
+        })
+        return res.status(200).json({
+            message:"User logout Sucsessfully"
+        })
+    }catch(err){
+        console.log("error in logout controller")
+        error:err.message
+        
+    }
+}
+export {registerUser,loginUser,updatedUser,profile,logout}

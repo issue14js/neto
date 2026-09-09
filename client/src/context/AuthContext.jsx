@@ -11,7 +11,9 @@ export function AuthProvider({children}){
     const [loding, setLoding] = useState(true)
     const register = async (formData)=>{
         try{
-           const res = await axios.post(`${rooturl}/api/auth/register`,formData)
+           const res = await axios.post(`${rooturl}/api/auth/register`,formData,{
+        withCredentials: true
+    })
            setUser(res.data.newUser)
            return res.data
         }catch(err){
@@ -24,7 +26,9 @@ export function AuthProvider({children}){
     const login = async (formData)=>{
         try{
             // console.log("Sending:", formData);
-            const res = await axios.post(`${rooturl}/api/auth/login`,formData)
+            const res = await axios.post(`${rooturl}/api/auth/login`,formData,{
+        withCredentials: true
+    })
             setUser(res.data.newUser)
             return res.data
         }catch(err){
@@ -33,12 +37,18 @@ export function AuthProvider({children}){
             
         }
     }
-    const logout = ()=>{
-        localStorage.removeItem('token')
-        setUser(null)
+ const logout = async () => {
+    try {
+        await axios.get(
+            `${rooturl}/api/auth/logout`,
+            { withCredentials: true }
+        );
 
-
+        setUser(null);
+    } catch (err) {
+        console.log("Logout error:", err);
     }
+};
     const profile = async ()=>{
         try{
             const res = await axios.get(`${rooturl}/api/auth/profile`,
@@ -47,7 +57,6 @@ export function AuthProvider({children}){
             }
             )
             setUser(res.data.user)
-            console.log(res.data.user)
             return res.data
         }catch(err){
             console.log(err)

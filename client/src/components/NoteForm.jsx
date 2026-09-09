@@ -31,11 +31,27 @@ const handleSubmit = async (e) => {
 };
   return (
     <form onSubmit={handleSubmit} className={`z-[99]   left-1/2 top-30 bg-amber-600 -translate-x-1/2 -translate-y-1/2" absolute p-3 rounded-2xl w-80  ${theme==='light'?"bg-white text-black":"bg-black text-white"} ` } action="">
-        <input className={`outline-none w-[92%] border-b h-10 text-2xl ${theme==='light'?"bg-white text-black":"bg-black text-white"}`}
-        type="text" placeholder='Title'/>
-        <button onClick={ onClose }  className=' cursor-pointer text-2xl mr-2'>X</button>
+       <input
+    className={`outline-none w-[92%] border-b h-10 text-2xl ${
+        theme === "light"
+            ? "bg-white text-black"
+            : "bg-black text-white"
+    }`}
+    name="title"
+    value={form.title}
+    onChange={handleChange}
+    type="text"
+    placeholder="Title"
+/> 
+        <button type='button' onClick={ onClose }   className=' cursor-pointer text-2xl mr-2'>X</button>
 
-        <textarea className=' outline-none resize-none w-full  h-80' name="" id=""></textarea>
+       <textarea
+    name="content"
+    value={form.content}
+    onChange={handleChange}
+    className="outline-none resize-none w-full h-80"
+    placeholder="Write your note..."
+></textarea>
         <div className="flex px-2 justify-between w-full">
 
        <select
@@ -44,8 +60,8 @@ const handleSubmit = async (e) => {
          onChange={handleChange}
          className="rounded-lg cursor-pointer text-blue-900 outline-none"
          >
-            <option className='text-blue-800 cursor-pointer' value="private">Private</option>
-             <option className='text-blue-800 cursor-pointer' value="public">Public</option>
+            <option className='text-blue-800 cursor-pointer' value="private">private</option>
+             <option className='text-blue-800 cursor-pointer' value="public">public</option>
        </select>
 
        <button className='py-2 px-4 rounded-4xl cursor-pointer bg-amber-400'>Create</button>
