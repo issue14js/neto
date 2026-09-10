@@ -7,7 +7,7 @@ const Banner = () => {
 
     return (
         <section
-            className={`relative flex h-full w-full overflow-hidden rounded-xl border px-4 py-4 transition-colors duration-300 sm:px-6 ${
+            className={`relative flex h-full w-full overflow-hidden rounded-xl border px-4 py-4 sm:px-6 ${
                 isDark
                     ? "border-violet-400/20 bg-gradient-to-br from-violet-950 via-indigo-950 to-slate-950 text-white"
                     : "border-violet-200 bg-gradient-to-br from-violet-100 via-fuchsia-50 to-amber-50 text-zinc-900"

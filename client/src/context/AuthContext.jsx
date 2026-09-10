@@ -1,6 +1,7 @@
-import {createContext, useState, } from "react"
+import {createContext, useEffect, useState, } from "react"
 import axios from 'axios'
 import { rooturl } from "../config/api.js";
+
 
 
 
@@ -49,7 +50,7 @@ export function AuthProvider({children}){
         console.log("Logout error:", err);
     }
 };
-    const profile = async ()=>{
+ const profile = async ()=>{
         try{
             const res = await axios.get(`${rooturl}/api/auth/profile`,
                    {
@@ -62,7 +63,26 @@ export function AuthProvider({children}){
             console.log(err)
             throw err
         }
+}
+const checkAuth = async () => {
+    try {
+        const response = await axios.get(
+            `${rooturl}/api/auth/profile`,
+            {
+                withCredentials: true
+            }
+        );
+
+        setUser(response.data.user);
+    } catch (error) {
+        setUser(null);
+    } finally {
+        setLoding(false);
     }
+};
+useEffect(() => {
+    checkAuth();
+}, []);
     return (
 
         <AuthContext.Provider

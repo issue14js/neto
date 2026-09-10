@@ -27,7 +27,7 @@ export function NoteProvider({ children }) {
         try {
             const res = await axios.get(`${rooturl}/api/note/`, { withCredentials: true })
             setnote(res.data.note);
-            setallNote(res.data.allnote);
+            setallNote(res.data.allNote);
             return res.data
         } catch (err) {
             console.log("Error", err)

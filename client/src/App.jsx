@@ -5,6 +5,7 @@ import Register from './components/Register'
 import Dashboard from './components/Dashboard'
 import Login from './components/Login'
 import Home from './components/Home'
+import ProtectedRoute from './components/ProtectedRoute'
 
 
 
@@ -13,7 +14,7 @@ const App = () => {
   <div className='bg-black h-screen w-full flex justify-center items-center'>
     <Routes>
       <Route path='/' element={<Home/>}/>
-      <Route path='/dashboard' element={<Dashboard/>}/>
+      <Route path='/dashboard' element={<ProtectedRoute><Dashboard/></ProtectedRoute>}/>
       <Route path='/register' element={<Register/>}/>
       <Route path='/login' element={<Login/>}/>
     </Routes>
