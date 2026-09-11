@@ -4,51 +4,59 @@ import jwt from "jsonwebtoken"
 import bcrypt from "bcryptjs"
 
 
-async function registerUser(req,res){
-    try{
-        const {username,password,name} = req.body
-        const user = await userModel.findOne({username}).select("+password")
-        if(user){
-            return res.status(400).json({message:"user already exists with this username"})
+async function registerUser(req, res) {
+    try {
+        const { username, password, name } = req.body
+        const user = await userModel.findOne({ username }).select("+password")
+        if (user) {
+            return res.status(400).json({ message: "user already exists with this username" })
         }
-        const haspass = await bcrypt.hash(password,10)
-        const newUser = await userModel.create({username,password:haspass,name})
-        const token = jwt.sign({id:newUser._id}, process.env.JWT_SECRET,{expiresIn:"5h"})
-        res.cookie("token",token,{httpOnly:true})
-        return res.status(201).json({message:"user created successfully",newUser})
-    } catch(err){
-        console.log("error in register controller",err)
+        const haspass = await bcrypt.hash(password, 10)
+        const newUser = await userModel.create({ username, password: haspass, name })
+        const token = jwt.sign({ id: newUser._id }, process.env.JWT_SECRET, { expiresIn: "5h" })
+        res.cookie("token", token, {
+            httpOnly: true,
+            secure: false,
+            sameSite: "lax"
+        });
+        return res.status(201).json({ message: "user created successfully", newUser })
+    } catch (err) {
+        console.log("error in register controller", err)
     }
 }
 
-async function loginUser(req,res){
-    try{
-        const {username,password}=req.body
-        const user = await userModel.findOne({username}).select("+password")
-        if(!user){
-            return res.status(400).json({message:"user not Avelable with this username or password"})
+async function loginUser(req, res) {
+    try {
+        const { username, password } = req.body
+        const user = await userModel.findOne({ username }).select("+password")
+        if (!user) {
+            return res.status(400).json({ message: "user not Avelable with this username or password" })
         }
-        const comparePass = await bcrypt.compare(password,user.password)
-        if(!comparePass){
-            return res.status(400).json({message:"user not Avelable with this username or password"})
+        const comparePass = await bcrypt.compare(password, user.password)
+        if (!comparePass) {
+            return res.status(400).json({ message: "user not Avelable with this username or password" })
         }
-        const token = jwt.sign({id:user._id}, process.env.JWT_SECRET,{expiresIn:"5h"})
-        res.cookie("token",token,{httpOnly:true})
-       return res.status(201).json({
-            message:"user login succssfully",
-            newUser:user
+        const token = jwt.sign({ id: user._id }, process.env.JWT_SECRET, { expiresIn: "5h" })
+        res.cookie("token", token, {
+            httpOnly: true,
+            secure: false,
+            sameSite: "lax"
+        });
+        return res.status(201).json({
+            message: "user login succssfully",
+            newUser: user
         })
-    } catch(err){
-        console.log("Error in login controller",err)
+    } catch (err) {
+        console.log("Error in login controller", err)
     }
 }
 
-async function updatedUser(req,res){
-    try{
-        const {username,password,name,avatar}= req.body
-        const user = await userModel.findOne({username}).select("+password")
-        if(!user){
-            return res.status(404).json({message:"user not found"})
+async function updatedUser(req, res) {
+    try {
+        const { username, password, name, avatar } = req.body
+        const user = await userModel.findOne({ username }).select("+password")
+        if (!user) {
+            return res.status(404).json({ message: "user not found" })
         }
         const updatedUser = await userModel.findByIdAndUpdate(
             user._id,
@@ -56,16 +64,16 @@ async function updatedUser(req,res){
                 password,
                 name,
                 avatar
-            },{new:true}
+            }, { new: true }
         )
         return res.status(200).json({
-            message:"user updated succsessfully",
+            message: "user updated succsessfully",
             user: updatedUser
         })
 
-    } catch(err){
-       return res.status(500).json({
-            message:"Error in user update controller", err
+    } catch (err) {
+        return res.status(500).json({
+            message: "Error in user update controller", err
         })
     }
 }
@@ -73,24 +81,26 @@ async function updatedUser(req,res){
 async function profile(req, res) {
 
     const user = req.user;
-   return res.status(200).json({
-    
+    return res.status(200).json({
+
         message: "Profile fetched successfully",
         user
     });
 }
-async function logout (req,res) {
-    try{
-        res.clearCookie("token",{
-            httpOnly:true   
+async function logout(req, res) {
+    try {
+        res.clearCookie("token", {
+            httpOnly: true
         })
-        return res.status(200).json({
-            message:"User logout Sucsessfully"
-        })
-    }catch(err){
+        res.clearCookie("token", {
+            httpOnly: true,
+            secure: false,
+            sameSite: "lax"
+        });
+    } catch (err) {
         console.log("error in logout controller")
-        error:err.message
-        
+        error: err.message
+
     }
 }
-export {registerUser,loginUser,updatedUser,profile,logout}
+export { registerUser, loginUser, updatedUser, profile, logout }

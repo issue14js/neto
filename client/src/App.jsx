@@ -2,7 +2,7 @@ import React from 'react'
 import './App.css'
 import { Routes, Route } from 'react-router-dom'
 import Register from './components/Register'
-import Dashboard from './components/Dashboard'
+import Dashboard from './components/Dashboard/Dashboard'
 import Login from './components/Login'
 import Home from './components/Home'
 import ProtectedRoute from './components/ProtectedRoute'
@@ -11,13 +11,20 @@ import ProtectedRoute from './components/ProtectedRoute'
 
 const App = () => {
   return (
-  <div className='bg-black h-screen w-full flex justify-center items-center'>
-    <Routes>
-      <Route path='/' element={<Home/>}/>
-      <Route path='/dashboard' element={<ProtectedRoute><Dashboard/></ProtectedRoute>}/>
-      <Route path='/register' element={<Register/>}/>
-      <Route path='/login' element={<Login/>}/>
-    </Routes>
+    <div className='bg-black h-screen w-full flex justify-center items-center'>
+      <Routes>
+        <Route path='/' element={<Home />} />
+        <Route
+          path="/dashboard"
+          element={
+            <ProtectedRoute>
+              <Dashboard />
+            </ProtectedRoute>
+          }
+        />
+        <Route path='/register' element={<Register />} />
+        <Route path='/login' element={<Login />} />
+      </Routes>
     </div>
   )
 }
