@@ -9,7 +9,7 @@ const Banner = () => {
         : "border-violet-200 bg-gradient-to-br from-violet-100 via-fuchsia-50 to-amber-50 text-zinc-900";
 
     return (
-        <div className="h-full p-4">
+        <div className="h-full py-4">
             <section
                 className={`relative flex h-full w-full overflow-hidden rounded-xl px-4 py-4 sm:px-6 ${themeStyles}`}
             >

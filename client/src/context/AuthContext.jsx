@@ -9,7 +9,7 @@ export const AuthContext = createContext()
 
 export function AuthProvider({ children }) {
     const [user, setUser] = useState(null)
-    const [loading, setLoding] = useState(true)
+    const [loading, setLoding] = useState(true) 
     const register = async (formData) => {
         try {
             const res = await axios.post(`${rooturl}/api/auth/register`, formData, {
@@ -33,6 +33,7 @@ export function AuthProvider({ children }) {
             setUser(res.data.newUser)
             return res.data
         } catch (err) {
+            
             console.log(err);
             throw err
 
@@ -44,7 +45,6 @@ export function AuthProvider({ children }) {
                 `${rooturl}/api/auth/logout`,
                 { withCredentials: true }
             );
-
             setUser(null);
         } catch (err) {
             console.log("Logout error:", err);

@@ -97,6 +97,9 @@ async function logout(req, res) {
             secure: false,
             sameSite: "lax"
         });
+        return res.status(200).json({
+            message: "User logout successfully",
+        });
     } catch (err) {
         console.log("error in logout controller")
         error: err.message

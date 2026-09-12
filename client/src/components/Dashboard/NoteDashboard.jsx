@@ -3,10 +3,9 @@ import { useState } from "react";
 import { useTheme } from "../../hooks/useTheme";
 import { useNote } from "../../hooks/useNote";
 
-const Note = () => {
+const Note = ({onCreateNote }) => {
     const { theme, changeTheme } = useTheme()
     const { note, allNote, getnote } = useNote()
-    const [showCreateNote, setShowCreateNote] = useState(false);
     const isDark = theme === "dark";
     return (
         <div className="rounded-xl py-1 relative ">
@@ -15,11 +14,9 @@ const Note = () => {
                 <span className={` text-sm relative left-100 cursor-pointer font-bold  ${isDark ? "text-white" : "text-violet-700"}`}>See all</span>
                 <button
                     type="button"
-                    onClick={() => {
-                        setShowCreateNote(true);
-                    }}
+                    onClick={onCreateNote}
                     className={`relative z-[9999] flex h-10 w-10 cursor-pointer top-30 right-10 items-center justify-center rounded-full border text-3xl
-        ${isDark
+                     ${isDark
                             ? "border-violet-200 bg-violet-950 text-white"
                             : "border-violet-400 bg-violet-950 text-white"
                         }`}
