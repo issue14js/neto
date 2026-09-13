@@ -34,6 +34,17 @@ export function NoteProvider({ children }) {
             throw err
         }
     }
+    const updateNote = async(formData)=>{
+        try{
+            const res = await axios.put(`${rooturl}/api/note/update`,formData,{
+                withCredentials: true
+            })
+            await getnote()
+        }catch(err){
+            console.log("Error",err)
+            throw err
+        }
+    }
 
 
 
@@ -41,7 +52,7 @@ export function NoteProvider({ children }) {
 
     return (
         <NoteContext.Provider
-            value={{ note,allNote, createNote,getnote }}>
+            value={{ note,allNote, createNote,getnote,updateNote }}>
             {children}
         </NoteContext.Provider>
     )

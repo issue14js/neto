@@ -3,12 +3,12 @@ import { useAuth } from "../hooks/useAuth";
 import { useNote } from "../hooks/useNote";
 import Sidebar from "./Dashboard/SidebarDashboard";
 
-const Profile = () => {
+const Profile = (themeStyles) => {
     const { user } = useAuth();
     const { note } = useNote();
 
     return (
-        <div className="min-h-screen h-screen w-full overflow-hidden sm:flex sm:justify-center sm:flex-col bg-black text-white">
+        <div className={`min-h-screen h-screen w-full  sm:flex sm:justify-center sm:flex-col ${themeStyles}`}>
 
             {/* Profile Header */}
             <section  className="mx-auto max-w-4xl px-4 py-8">
@@ -95,7 +95,7 @@ const Profile = () => {
             </div>
 
             {/* Posts */}
-            <div className="mx-auto overflow-y-auto gap-2  p-2  scrollbar-none sm:h-60 h-full grid sm:gap-4 sm:gridw-4xl grid-cols-3 ">
+            <div className="mx-auto overflow-y-auto gap-2  p-2  scrollbar-none sm:h-60 h-85 grid sm:gap-4 sm:gridw-4xl grid-cols-3 ">
                 {note?.map((item) => (
                     <div
                         key={item._id}
@@ -112,6 +112,7 @@ const Profile = () => {
                     </div>
                 ))}
             </div>
+            <Sidebar/>
             
 
         </div>

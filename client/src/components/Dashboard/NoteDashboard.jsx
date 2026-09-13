@@ -3,12 +3,19 @@ import { useState } from "react";
 import { useTheme } from "../../hooks/useTheme";
 import { useNote } from "../../hooks/useNote";
 
-const NoteDashboard = ({ onCreateNote }) => {
+const NoteDashboard = ({ onCreateNote,onUpdateNote,setnoteId }) => {
     const { theme, changeTheme } = useTheme()
     const { note, allNote, getnote } = useNote()
     const isDark = theme === "dark";
+    const NoteUpdate = ((id)=>{
+        setnoteId(id)
+        onUpdateNote()
 
-    console.log("onCreateNote:", onCreateNote);
+
+    })
+
+    // console.log(note);
+    // console.log("onCreateNote:", onCreateNote);
     return (
         <div className=" px-1 relative hidden row-start-2  sm:block sm:col-span-5 sm:row-start-3 ">
             <div className=" h-[17%] relative   flex justify-between ">
@@ -31,7 +38,7 @@ const NoteDashboard = ({ onCreateNote }) => {
                 className="h-[83%] w-full flex gap-1 px-1 pt-1 overflow-x-auto scrollbar-thin scrollbar-thumb-gray-400  scrollbar-track-transparent [transform:rotateX(180deg)]"
             >
                 {note.map((e) => {
-                    return <div key={e._id} className={`h-full cursor-pointer rounded shrink-0 overflow-hidden p-2 break-words whitespace-normal [transform:rotateX(180deg)] w-40 bg-violet-600 
+                    return <div key={e._id} onClick={()=>{ NoteUpdate(e._id)}} className={`h-full cursor-pointer rounded shrink-0 overflow-hidden p-2 break-words whitespace-normal [transform:rotateX(180deg)] w-40 bg-violet-600 
                                      ${isDark ? "border-violet-400/20 bg-gradient-to-br from-violet-950 via-indigo-950 to-slate-950 text-white"
                             : "border-violet-200 bg-gradient-to-br  from-violet-300 via-fuchsia-100 to-amber-100 text-zinc-900"} `}>
 

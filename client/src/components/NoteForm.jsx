@@ -58,7 +58,7 @@ const handleSubmit = async (e) => {
          name="visibility"
          value={form.visibility}
          onChange={handleChange}
-         className="rounded-lg cursor-pointer ${themeStyles} outline-none"
+         className={`rounded-lg cursor-pointer  outline-none`}
          >
             <option className='text-blue-800 cursor-pointer' value="private">Private</option>
              <option className='text-blue-800 cursor-pointer' value="public">Public</option>

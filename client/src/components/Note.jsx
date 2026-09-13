@@ -1,17 +1,30 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { useState } from 'react';
 import { useTheme } from '../hooks/useTheme';
 import { useNote } from '../hooks/useNote';
 
-const Note = ({ onClose }) => {
-    const { createNote } = useNote()
+const Note = ({ onClose,noteId,themeStyles }) => {
+    const { createNote,note,updateNote } = useNote()
     const { theme } = useTheme()
+    const selectedNote = note.find((e) => e._id === noteId);
+    // console.log(selectedNote._id)
     const [form, setForm] = useState({
-        title: "",
-        content: "",
-        visibility: "private"
+        title:``,
+        content: ``,
+        visibility: "private",
+        noteId:selectedNote?._id
     });
-
+    // console.log(form)
+    useEffect(()=>{
+        if(selectedNote){
+            setForm({
+                title:selectedNote.title,
+                content:selectedNote.content,
+                visibility:selectedNote.visibility,
+                noteId:selectedNote?._id
+            })
+        }
+    },[selectedNote])
     const handleChange = (e) => {
         const { name, value } = e.target;
         setForm({
@@ -23,19 +36,16 @@ const Note = ({ onClose }) => {
         e.preventDefault();
 
         try {
-            await createNote(form);
+            await updateNote(form);
             onClose();
         } catch (err) {
             console.log(err);
         }
     };
     return (
-        <form onSubmit={handleSubmit} className={`z-[99]  left-1/2 top-30 bg-amber-600 -translate-x-1/2 -translate-y-1/2" absolute p-3 rounded-2xl w-80  ${theme === 'light' ? "bg-white text-black" : "bg-black text-white"} `} action="">
+        <form onSubmit={handleSubmit} className={`z-[99]  left-1/2 top-30  -translate-x-1/2 -translate-y-1/2" absolute p-3 rounded-2xl w-80  ${themeStyles} `} action="">
             <input
-                className={`outline-none w-[92%] border-b h-10 text-2xl ${theme === "light"
-                        ? "bg-white text-black"
-                        : "bg-black text-white"
-                    }`}
+                className={`outline-none w-[92%] border-b h-10 text-2xl `}
                 name="title"
                 value={form.title}
                 onChange={handleChange}
@@ -57,13 +67,13 @@ const Note = ({ onClose }) => {
                     name="visibility"
                     value={form.visibility}
                     onChange={handleChange}
-                    className="rounded-lg cursor-pointer text-blue-900 outline-none"
+                    className="rounded-lg cursor-pointeroutline-none"
                 >
-                    <option className='text-blue-800 cursor-pointer' value="private">private</option>
-                    <option className='text-blue-800 cursor-pointer' value="public">public</option>
+                    <option className='text-blue-800 cursor-pointer' value="private">Private</option>
+                    <option className='text-blue-800 cursor-pointer' value="public">Public</option>
                 </select>
 
-                <button className='py-2 px-4 rounded-4xl cursor-pointer bg-amber-400'>Create</button>
+                <button className='py-2 px-4 rounded-4xl cursor-pointer '>Update</button>
             </div>
 
 

@@ -2,7 +2,7 @@ import { useNavigate } from "react-router-dom";
 import { useAuth } from "../../hooks/useAuth";
 import { useTheme } from "../../hooks/useTheme";
 
-const Sidebar = () => {
+const Sidebar = (themeStyles) => {
     const navigate = useNavigate();
 
     const { logout, profile } = useAuth();
@@ -33,8 +33,8 @@ const Sidebar = () => {
     };
 
     return (
-        <aside className="row-start-3  sm:col-start-1 sm:row-start-1  sm:row-span-3 w-full sm:h-full flex h-[43%] rounded-xl p-3">
-            <div className="flex justify-between w-full sm:justify-start  h-full sm:flex-col gap-2">
+        <aside className={`row-start-3  sm:col-start-1 sm:row-start-1  sm:row-span-3 w-full sm:h-full  flex h-[43%] rounded-xl p-3 ${themeStyles}`}>
+            <div className="flex justify-between w-full sm:justify-start   sm:flex-col gap-2">
                 <button
                     type="button"
                     onClick={handleHome}
