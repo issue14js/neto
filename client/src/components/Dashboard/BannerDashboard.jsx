@@ -1,17 +1,17 @@
 import { useTheme } from "../../hooks/useTheme";
 
-const Banner = () => {
+const BannerDashboard = () => {
     const { theme } = useTheme();
     const isDark = theme === "dark";
 
     const themeStyles = isDark
         ? "border-violet-400/20 bg-gradient-to-br from-violet-950 via-indigo-950 to-slate-950 text-white"
-        : "border-violet-200 bg-gradient-to-br from-violet-100 via-fuchsia-50 to-amber-50 text-zinc-900";
+        : "border-violet-200 bg-gradient-to-br from-violet-200 via-fuchsia-50 to-red-200 text-zinc-900";
 
     return (
-        <div className="h-full py-4">
+        <div className="h-full py-4 ">
             <section
-                className={`relative flex h-full w-full overflow-hidden rounded-xl px-4 py-4 sm:px-6 ${themeStyles}`}
+                className={` flex relative sm:h-[80%] w-full overflow-hidden rounded-xl px-4 py-4 sm:px-6 ${themeStyles}`}
             >
                 {/* Content */}
                 <div className="relative z-10 flex max-w-sm flex-1 flex-col justify-center">
@@ -61,4 +61,4 @@ const Banner = () => {
     );
 };
 
-export default Banner;
+export default BannerDashboard;

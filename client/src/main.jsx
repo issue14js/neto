@@ -4,6 +4,7 @@ import {BrowserRouter} from "react-router-dom"
 import { ThemeProvider } from './context/ThemeContext.jsx'
 import { AuthProvider } from './context/AuthContext.jsx'
 import { NoteProvider } from './context/NoteContext.jsx'
+import "remixicon/fonts/remixicon.css";
 import App from './App.jsx'
 
 

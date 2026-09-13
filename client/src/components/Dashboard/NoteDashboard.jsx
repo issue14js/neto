@@ -3,18 +3,20 @@ import { useState } from "react";
 import { useTheme } from "../../hooks/useTheme";
 import { useNote } from "../../hooks/useNote";
 
-const Note = ({onCreateNote }) => {
+const NoteDashboard = ({ onCreateNote }) => {
     const { theme, changeTheme } = useTheme()
     const { note, allNote, getnote } = useNote()
     const isDark = theme === "dark";
+
+    console.log("onCreateNote:", onCreateNote);
     return (
-        <div className="rounded-xl py-1 relative ">
+        <div className=" px-1 relative hidden row-start-2  sm:block sm:col-span-5 sm:row-start-3 ">
             <div className=" h-[17%] relative   flex justify-between ">
                 <span className={`text-xl  font-bold  ${isDark ? "text-white" : "text-violet-700"}`}>Note</span>
                 <span className={` text-sm relative left-100 cursor-pointer font-bold  ${isDark ? "text-white" : "text-violet-700"}`}>See all</span>
                 <button
                     type="button"
-                    onClick={onCreateNote}
+                    onClick={() => { console.log("PLUS CLICKED"); onCreateNote() }}
                     className={`relative z-[9999] flex h-10 w-10 cursor-pointer top-30 right-10 items-center justify-center rounded-full border text-3xl
                      ${isDark
                             ? "border-violet-200 bg-violet-950 text-white"
@@ -22,7 +24,12 @@ const Note = ({onCreateNote }) => {
                         }`}
                 >+ </button>
             </div>
-            <div className="h-[83%] w-216 pt-1  scrollbar-thin scrollbar-thumb-gray-400 scrollbar-track-transparent [transform:rotateX(180deg)] overflow-x-auto flex gap-1 px-1 ">
+            <div
+                onWheel={(e) => {
+                    e.currentTarget.scrollLeft += e.deltaY;
+                }}
+                className="h-[83%] w-full flex gap-1 px-1 pt-1 overflow-x-auto scrollbar-thin scrollbar-thumb-gray-400  scrollbar-track-transparent [transform:rotateX(180deg)]"
+            >
                 {note.map((e) => {
                     return <div key={e._id} className={`h-full cursor-pointer rounded shrink-0 overflow-hidden p-2 break-words whitespace-normal [transform:rotateX(180deg)] w-40 bg-violet-600 
                                      ${isDark ? "border-violet-400/20 bg-gradient-to-br from-violet-950 via-indigo-950 to-slate-950 text-white"
@@ -40,4 +47,4 @@ const Note = ({onCreateNote }) => {
     )
 }
 
-export default Note
+export default NoteDashboard

@@ -33,7 +33,7 @@ const Sidebar = () => {
     };
 
     return (
-        <aside className="row-start-3 bg-blue-200 sm:col-start-1 sm:row-start-1  sm:row-span-3 w-full sm:h-full flex h-[43%] bg-blue-200 rounded-xl p-3">
+        <aside className="row-start-3  sm:col-start-1 sm:row-start-1  sm:row-span-3 w-full sm:h-full flex h-[43%] rounded-xl p-3">
             <div className="flex justify-between w-full sm:justify-start  h-full sm:flex-col gap-2">
                 <button
                     type="button"

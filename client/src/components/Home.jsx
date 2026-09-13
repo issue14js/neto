@@ -12,12 +12,12 @@ const Home = () => {
     }, [user]);
 
   return (
-    <div className="h-screen w-full bg-zinc-900">
+    <div className="h-screen w-full ">
         
         <Navbar/>
         <div className="w-full  h-147 flex justify-center items-center">
 
-        <h1 className="text-4xl text-white">Home</h1>
+        <h1 className="text-4xl text-black">Home</h1>
         </div>
     </div>
   )

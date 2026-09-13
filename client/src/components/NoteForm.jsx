@@ -3,9 +3,13 @@ import { useState } from 'react';
 import { useTheme } from '../hooks/useTheme';
 import { useNote } from '../hooks/useNote';
 
-const NoteForm = ({ onClose }) => {
+const NoteForm = ({ onClose  }) => {
     const {createNote} = useNote()
     const {theme}=useTheme()
+      const isDark = theme === "dark";
+    const themeStyles = isDark
+        ? "border-violet-400/20 bg-gradient-to-br from-violet-900 via-indigo-950 to-slate-900 text-white"
+        : "border-violet-200 bg-gradient-to-br from-violet-100 via-fuchsia-50 to-amber-50 text-zinc-900";
     const [form, setForm] = useState({
     title: "",
     content: "",
@@ -30,13 +34,9 @@ const handleSubmit = async (e) => {
     }
 };
   return (
-    <form onSubmit={handleSubmit} className={`z-[99]   left-1/2 top-30 bg-amber-600 -translate-x-1/2 -translate-y-1/2" absolute p-3 rounded-2xl w-80  ${theme==='light'?"bg-white text-black":"bg-black text-white"} ` } action="">
+    <form onSubmit={handleSubmit} className={`z-[99]   left-1/2 top-30 bg-amber-600 -translate-x-1/2 -translate-y-1/2" absolute p-3 rounded-2xl w-80  ${themeStyles} ` } action="">
        <input
-    className={`outline-none w-[92%] border-b h-10 text-2xl ${
-        theme === "light"
-            ? "bg-white text-black"
-            : "bg-black text-white"
-    }`}
+    className={`outline-none w-[92%] border-b h-10 text-2xl `}
     name="title"
     value={form.title}
     onChange={handleChange}
@@ -58,13 +58,13 @@ const handleSubmit = async (e) => {
          name="visibility"
          value={form.visibility}
          onChange={handleChange}
-         className="rounded-lg cursor-pointer text-blue-900 outline-none"
+         className="rounded-lg cursor-pointer ${themeStyles} outline-none"
          >
-            <option className='text-blue-800 cursor-pointer' value="private">private</option>
-             <option className='text-blue-800 cursor-pointer' value="public">public</option>
+            <option className='text-blue-800 cursor-pointer' value="private">Private</option>
+             <option className='text-blue-800 cursor-pointer' value="public">Public</option>
        </select>
 
-       <button className='py-2 px-4 rounded-4xl cursor-pointer bg-amber-400'>Create</button>
+       <button className='py-2 px-4 rounded-4xl cursor-pointer '>Create</button>
              </div>
              
         
