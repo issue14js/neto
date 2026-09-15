@@ -1,8 +1,9 @@
 import Navbar from "./Navbar"
 import { useAuth } from "../hooks/useAuth"
 import { useEffect } from "react"
+import Sidebar from "./Dashboard/SidebarDashboard"
 
-const Home = () => {
+const Home = ({themeStyles}) => {
     
     const {user,profile} = useAuth()
     useEffect(() => {
@@ -12,13 +13,12 @@ const Home = () => {
     }, [user]);
 
   return (
-    <div className="h-screen w-full ">
+    <div className={` h-screen  w-full bg-red-500 ${themeStyles} `}>
         
         <Navbar/>
-        <div className="w-full  h-147 flex justify-center items-center">
-
-        <h1 className="text-4xl text-black">Home</h1>
-        </div>
+        <h1 className="text-4xl  ">Home</h1>
+        <Sidebar/>
+              
     </div>
   )
 }

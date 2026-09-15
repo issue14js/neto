@@ -1,11 +1,15 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useAuth } from "../hooks/useAuth";
 import { useNote } from "../hooks/useNote";
 import Sidebar from "./Dashboard/SidebarDashboard";
+import Post from "./Dashboard/Post";
 
 const Profile = (themeStyles) => {
     const { user } = useAuth();
-    const { note } = useNote();
+    const { note,getnote } = useNote();
+        useEffect(() => {
+        getnote();
+    }, []);
 
     return (
         <div className={`min-h-screen h-screen w-full  sm:flex sm:justify-center sm:flex-col ${themeStyles}`}>
@@ -64,7 +68,7 @@ const Profile = (themeStyles) => {
 
 
                 {/* Highlights */}
-                <div className="mt-10 flex gap-6 overflow-x-auto scrollbar-none">
+                {/* <div className="mt-10 flex gap-6 overflow-x-auto scrollbar-none">
                     {["My Mentor", "Development", "Learning", "Meetup", "AI", "Festival"].map(
                         (item) => (
                             <div
@@ -83,35 +87,16 @@ const Profile = (themeStyles) => {
                             </div>
                         )
                     )}
-                </div>
+                </div> */}
 
             </section>
-
             {/* Tabs */}
             <div className="flex w-90 items-center justify-between px-10 sm:w-full sm:px-90 border-t border-zinc-800 ">       
                     <i className="ri-grid-line text-xl" />
                     <i className="ri-video-line text-xl" />
                     <i className="ri-bookmark-line text-xl" />
             </div>
-
-            {/* Posts */}
-            <div className="mx-auto overflow-y-auto gap-2  p-2  scrollbar-none sm:h-60 h-85 grid sm:gap-4 sm:gridw-4xl grid-cols-3 ">
-                {note?.map((item) => (
-                    <div
-                        key={item._id}
-                        className=" h-40 w-28 overflow-hidden p-2 sm:h-60 sm:w-74 rounded  bg-zinc-900"
-                    >
-                            <h3 className="font-semibold text-sm" >
-                                {item.title}
-                            </h3>
-
-                            <p className="mt-2 text-xs text-zinc-400">
-                                {item.content}
-                            </p>
-                        
-                    </div>
-                ))}
-            </div>
+            <Post/>
             <Sidebar/>
             
 

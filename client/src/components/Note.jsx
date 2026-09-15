@@ -2,29 +2,29 @@ import React, { useEffect } from 'react'
 import { useState } from 'react';
 import { useTheme } from '../hooks/useTheme';
 import { useNote } from '../hooks/useNote';
-
-const Note = ({ onClose,noteId,themeStyles }) => {
-    const { createNote,note,updateNote } = useNote()
+import { useAuth } from '../hooks/useAuth';
+const Note = ({ onClose, noteId, themeStyles }) => {
+    const { createNote, note, updateNote,allNote } = useNote()
     const { theme } = useTheme()
-    const selectedNote = note.find((e) => e._id === noteId);
-    // console.log(selectedNote._id)
+    const { user } = useAuth()
+    const selectedNote = allNote.find((e) => e._id === noteId);
+    const validUser = selectedNote?.owner === user?._id;
     const [form, setForm] = useState({
-        title:``,
+        title: ``,
         content: ``,
         visibility: "private",
-        noteId:selectedNote?._id
+        noteId: selectedNote?._id
     });
-    // console.log(form)
-    useEffect(()=>{
-        if(selectedNote){
+    useEffect(() => {
+        if (selectedNote) {
             setForm({
-                title:selectedNote.title,
-                content:selectedNote.content,
-                visibility:selectedNote.visibility,
-                noteId:selectedNote?._id
+                title: selectedNote.title,
+                content: selectedNote.content,
+                visibility: selectedNote.visibility,
+                noteId: selectedNote?._id
             })
         }
-    },[selectedNote])
+    }, [selectedNote])
     const handleChange = (e) => {
         const { name, value } = e.target;
         setForm({
@@ -62,8 +62,8 @@ const Note = ({ onClose,noteId,themeStyles }) => {
                 placeholder="Write your note..."
             ></textarea>
             <div className="flex px-2 justify-between w-full">
-
-                <select
+                {validUser ? (
+                    <select
                     name="visibility"
                     value={form.visibility}
                     onChange={handleChange}
@@ -73,7 +73,16 @@ const Note = ({ onClose,noteId,themeStyles }) => {
                     <option className='text-blue-800 cursor-pointer' value="public">Public</option>
                 </select>
 
-                <button className='py-2 px-4 rounded-4xl cursor-pointer '>Update</button>
+                ):<h1>Like</h1>}
+                
+                {validUser ? (
+                    <button className="py-2 px-4 rounded-4xl cursor-pointer">
+                        Update
+                    </button>
+                ) : (
+                    <h1>Conlaburate</h1>
+                )}
+
             </div>
 
 

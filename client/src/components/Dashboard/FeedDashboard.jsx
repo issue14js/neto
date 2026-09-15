@@ -1,7 +1,7 @@
 import { useTheme } from "../../hooks/useTheme";
 import { useNote } from "../../hooks/useNote";
 
-const FeedDashboard = () => {
+const FeedDashboard = ({onViewNote,setnoteId}) => {
     const { theme } = useTheme();
     const { allNote } = useNote();
 
@@ -10,6 +10,13 @@ const FeedDashboard = () => {
     const cardStyle = isDark
         ? "border-violet-400/20 bg-gradient-to-br from-violet-950 via-indigo-950 to-slate-950 text-white"
         : "border-violet-200 bg-gradient-to-br from-violet-300 via-fuchsia-100 to-amber-100 text-zinc-900";
+
+         const NoteView = ((id)=>{
+            setnoteId(id)
+            onViewNote()
+
+
+    })
 
     return (
         <div className="flex min-h-0 flex-col overflow-hidden rounded-xl sm:col-start-7 sm:col-span-2 sm:row-start-2 sm:row-span-2">
@@ -21,15 +28,16 @@ const FeedDashboard = () => {
     </h2>
 
     <div className="flex min-h-0 flex-1 flex-col gap-1 overflow-y-auto p-1 scrollbar-none sm:scrollbar-thin sm:scrollbar-track-transparent sm:scrollbar-thumb-gray-400">
-        {allNote.map((note) => (
-            <div
-                key={note._id}
+        {allNote.map((note) => {
+            return <div
+                onClick={()=>{NoteView(note._id)}}
+                key={note._id} 
                 className={`h-20 w-full shrink-0 overflow-hidden rounded p-2 ${cardStyle}`}
             >
                 <h3 className="text-sm font-bold">{note.title}</h3>
                 <p className="text-[10px] opacity-70">{note.content}</p>
             </div>
-        ))}
+        })}
     </div>
 </div>
     );

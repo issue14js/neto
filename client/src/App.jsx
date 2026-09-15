@@ -14,7 +14,7 @@ import Note from './components/Note'
 
 const App = () => {
   const { theme } = useTheme();
-  const [updateNote, setupdateNote] = useState(false)
+  const [viewNote, setviewNote] = useState(false)
   const [noteId, setnoteId] = useState(null)
   const isDark = theme === "dark";
   const themeStyles = isDark
@@ -24,7 +24,7 @@ const App = () => {
   return (
     <div className={` h-screen w-full flex justify-center items-center ${themeStyles}`}>
       <Routes>
-        <Route path='/' element={<Home />} />
+        <Route path='/' element={<Home themeStyles={themeStyles} />} />
         <Route path='/profile' element={<ProtectedRoute> <Profile themeStyles={themeStyles}  /></ProtectedRoute>} />
         <Route
           path="/dashboard"
@@ -33,8 +33,8 @@ const App = () => {
               <Dashboard
                 themeStyles={themeStyles}
                 setnoteId = {setnoteId}
-                setupdateNote={setupdateNote}
-                onUpdateNote={() => setupdateNote(true)}
+                setviewNote={setviewNote}
+                onViewNote={() => setviewNote(true)}
               />
             </ProtectedRoute>
           }
@@ -43,8 +43,8 @@ const App = () => {
         <Route path='/login' element={<Login />} />
       </Routes>
       {/* <Note/> */}
-      {updateNote && (
-        <Note onClose={() => setupdateNote(false)} noteId ={noteId} themeStyles={themeStyles}/>)}
+      {viewNote && (
+        <Note onClose={() => setviewNote(false)} noteId ={noteId} themeStyles={themeStyles}/>)}
     </div>
   )
 }

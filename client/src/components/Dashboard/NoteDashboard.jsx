@@ -3,13 +3,13 @@ import { useState } from "react";
 import { useTheme } from "../../hooks/useTheme";
 import { useNote } from "../../hooks/useNote";
 
-const NoteDashboard = ({ onCreateNote,onUpdateNote,setnoteId }) => {
+const NoteDashboard = ({ onCreateNote,onViewNote,setnoteId }) => {
     const { theme, changeTheme } = useTheme()
     const { note, allNote, getnote } = useNote()
     const isDark = theme === "dark";
     const NoteUpdate = ((id)=>{
         setnoteId(id)
-        onUpdateNote()
+        onViewNote()
 
 
     })

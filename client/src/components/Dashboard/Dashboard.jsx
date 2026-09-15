@@ -8,7 +8,7 @@ import FeedDashboard from "./FeedDashboard";
 import NoteDashboard from "./NoteDashboard";
 
 
-const Dashboard = ({onUpdateNote,setupdateNote,setnoteId,themeStyles}) => {
+const Dashboard = ({onViewNote,setviewNote,setnoteId,themeStyles}) => {
     const { getnote } = useNote();
     const [showCreateNote, setShowCreateNote] = useState(false);    
     const handleCreateNote = () => {
@@ -23,8 +23,8 @@ const Dashboard = ({onUpdateNote,setupdateNote,setnoteId,themeStyles}) => {
         <div className={`grid h-screen w-full grid-cols-1 sm:grid-rows-[40%_30%_30%] grid-rows-[25%_auto_7%] sm:grid-cols-8 sm:grid-rows-3 `}>
             <Sidebar themeStyles={themeStyles} />
             <NavbarDashboard  />
-            <FeedDashboard/>
-            <NoteDashboard onCreateNote={() => setShowCreateNote(true)} onUpdateNote={()=> {setupdateNote(true)}} setnoteId={setnoteId} />
+            <FeedDashboard onViewNote={()=> {setviewNote(true)}} setnoteId={setnoteId}  />
+            <NoteDashboard onCreateNote={() => setShowCreateNote(true)} onViewNote={()=> {setviewNote(true)}} setnoteId={setnoteId} />
             <TemplateDashboard/>
             {showCreateNote && (
              <NoteForm onClose={() => setShowCreateNote(false)}/> )} 

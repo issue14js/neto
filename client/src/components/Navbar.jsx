@@ -16,7 +16,7 @@ const Navbar = () => {
         
     }
   return (
-    <div className="w-full  text-black px-4 h-15   flex justify-between items-center">
+    <div className="w-full   px-4 h-15   flex justify-between items-center">
         <h1 className=' text-2xl '>Neto</h1>
         <div className="flex justify-between items-center  gap-4">
             <button onClick={gotoDashboard} className='py-2 px-4  border rounded-3xl '>{user ? "Dashboard" : "Login"}</button>
