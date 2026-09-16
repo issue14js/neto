@@ -13,18 +13,15 @@ const NoteDashboard = ({ onCreateNote,onViewNote,setnoteId }) => {
 
 
     })
-
-    // console.log(note);
-    // console.log("onCreateNote:", onCreateNote);
     return (
-        <div className=" px-1 relative hidden row-start-2  sm:block sm:col-span-5 sm:row-start-3 ">
+        <div className=" px-1  relative hidden row-start-2  sm:block sm:col-span-5 sm:col-start-2 sm:row-start-3 ">
             <div className=" h-[17%] relative   flex justify-between ">
                 <span className={`text-xl  font-bold  ${isDark ? "text-white" : "text-violet-700"}`}>Note</span>
-                <span className={` text-sm relative left-100 cursor-pointer font-bold  ${isDark ? "text-white" : "text-violet-700"}`}>See all</span>
+                <span className={` text-sm relative left-95 cursor-pointer font-bold  ${isDark ? "text-white" : "text-violet-700"}`}>See all</span>
                 <button
                     type="button"
                     onClick={() => { console.log("PLUS CLICKED"); onCreateNote() }}
-                    className={`relative z-[9999] flex h-10 w-10 cursor-pointer top-30 right-10 items-center justify-center rounded-full border text-3xl
+                    className={`relative z-[9999] flex h-10 w-10 cursor-pointer top-20 right-1 items-center justify-center rounded-full border text-3xl
                      ${isDark
                             ? "border-violet-200 bg-violet-950 text-white"
                             : "border-violet-400 bg-violet-950 text-white"

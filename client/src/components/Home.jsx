@@ -13,11 +13,10 @@ const Home = ({themeStyles}) => {
     }, [user]);
 
   return (
-    <div className={` h-screen  w-full bg-red-500 ${themeStyles} `}>
+    <div className={` w-full ${themeStyles} h-screen`}>
         
         <Navbar/>
         <h1 className="text-4xl  ">Home</h1>
-        <Sidebar/>
               
     </div>
   )

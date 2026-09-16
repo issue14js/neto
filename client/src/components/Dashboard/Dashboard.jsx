@@ -13,14 +13,15 @@ const Dashboard = ({onViewNote,setviewNote,setnoteId,themeStyles}) => {
     const [showCreateNote, setShowCreateNote] = useState(false);    
     const handleCreateNote = () => {
     setShowCreateNote(true);
-};
+ };
 
     useEffect(() => {
         getnote();
     }, []);
 
     return (
-        <div className={`grid h-screen w-full grid-cols-1 sm:grid-rows-[40%_30%_30%] grid-rows-[25%_auto_7%] sm:grid-cols-8 sm:grid-rows-3 `}>
+        <div className={`grid h-screen w-full grid-cols-1 grid-rows-[25%_auto_7%] 
+                         sm:grid-cols-8 sm:grid-rows-[40%_30%_30%] `}>
             <Sidebar themeStyles={themeStyles} />
             <NavbarDashboard  />
             <FeedDashboard onViewNote={()=> {setviewNote(true)}} setnoteId={setnoteId}  />

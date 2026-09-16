@@ -5,7 +5,7 @@ import { useTheme } from "../../hooks/useTheme";
 const Sidebar = (themeStyles) => {
     const navigate = useNavigate();
 
-    const { logout, profile,user } = useAuth();
+    const { logout, profile, user } = useAuth();
     const { theme, changeTheme } = useTheme();
 
     const isDark = theme === "dark";
@@ -33,43 +33,51 @@ const Sidebar = (themeStyles) => {
     };
 
     return (
-        <aside className={`row-start-3 sm:hidden   sm:col-start-1 sm:row-start-1  justify-between items-center sm:row-span-3 w-full sm:h-full  flex h-10 items-center absolute bottom-0 sm:h-[43%] rounded-xl p-3 ${themeStyles}`}>
+        <aside className={`row-start-3   text-sm relative  w-full 
+            sm:row-start-1 sm:col-start-1 sm:row-span-3 sm:h-full ${themeStyles}`}>
+            <div className="flex text-xl items-center h-full   py-5  justify-between sm:flex-col gap-2">
                 <button
                     type="button"
                     onClick={handleHome}
-                    className={`cursor-pointer p-3 text-left font-semibold `}
+                    className={`cursor-pointer text-left font-semibold ${textStyle}`}
                 >
                     Home
                 </button>
 
                 <button
                     type="button"
-                    onClick={handleTheme}
-                    className={`cursor-pointer p-3 text-left font-semibold `}
+                    onClick={handleProfile}
+                    className={`cursor-pointer text-left font-semibold ${textStyle}`}
                 >
-                    {isDark ? "Dark" : "Light"}
+                    Profile
                 </button>
 
                 <button
                     type="button"
+                    onClick={handleTheme}
+                    className={`cursor-pointer text-left font-semibold ${textStyle}`}
+                >
+                    {isDark ? "Dark" : "Light"}
+                </button>
+                <button
+                    type="button"
                     onClick={handleLogout}
-                    className={`cursor-pointer p-3 text-left font-semibold `}
+                    className={`cursor-pointer sm:block hidden text-left font-semibold ${textStyle}`}
                 >
                     Logout
                 </button>
+                <div onClick={handleProfile} className="items-center bg-blue-500 justify-center h-8 w-8 
+                                                        sm:hidden
+                                     ">
+                    <img
+                        src={user?.avatar}
+                        alt="Profile"
+                        className="h-8 w-10 sm:h-8 border-2 border-yellow-700 sm:w-8 rounded-full"
+                    />
+                </div>
+                
+            </div>
 
-                 <div onClick={handleProfile} className="  border-2 border-yellow-500 rounded-full items-center justify-center sm:w-30  h-8 w-8 flex cursor-pointer items-center  gap-2">
-                        <img
-                            src={user?.avatar}
-                            alt="Profile"
-                            className="h-[100%] w-[100%] rounded-full"
-                        />
-                        {user && (
-                            <span className="hidden truncate sm:block">
-                                {user.username}
-                            </span>
-                        )}
-                    </div>
         </aside>
     );
 };
