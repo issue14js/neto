@@ -1,20 +1,31 @@
 import React, { useEffect } from 'react'
 import { useNote } from '../../hooks/useNote'
 
-const Post = () => { 
+const Post = ({ themeStyles, onViewNote, setnoteId}) => { 
     const {note,getnote}=useNote()
             useEffect(() => {
             getnote();
         }, []);
+
+        const HandelViewNote = (id)=>{
+            setnoteId(id)
+            onViewNote()
+        }
     return (
-        <div className=" h-120 w-full grid p-2 gap-2 overflow-y-auto grid-cols-3">
+        <div className="order-2  flex flex-col justify-center items-center ">
+            <div className=" border flex justify-center items-center w-[99%] rounded h-10"> <h1>Your Notes</h1></div>
+
+        <div className=" h-110 w-full grid p-2 gap-2  overflow-y-auto grid-cols-3 scrollbar-thin scrollbar-thumb-gray-400  scrollbar-track-transparent 
+                        sm:h-80  ">
             {note?.map((e) => (
-                <div key={e._id} className="h-27 w-27 break-words whitespace-normal p-2 bg-zinc-500">
-                    <h1 className="text-sm text-white font-semibold">{e.title}</h1>
-                    <h1 className="text-sm text-gray-400">{e.content}</h1>
+                <div key={e._id} onClick={()=> HandelViewNote(e._id)} className="h-27 border overflow-hidden rounded w-27 break-words whitespace-normal p-2 
+                sm:p-5  sm:w-97 sm:h-97">
+                    <h1 className=" text-[12px] sm:text-xl  font-semibold">{e.title}</h1>
+                    <h1 className=" text-[10px]  sm:text-sm ">{e.content}</h1>
                 </div>
             ))}
         </div>
+            </div>
     )
 }
 

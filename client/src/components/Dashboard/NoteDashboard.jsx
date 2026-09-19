@@ -2,6 +2,7 @@ import React from 'react'
 import { useState } from "react";
 import { useTheme } from "../../hooks/useTheme";
 import { useNote } from "../../hooks/useNote";
+import Note from '../Note';
 
 const NoteDashboard = ({ onCreateNote,onViewNote,setnoteId }) => {
     const { theme, changeTheme } = useTheme()
@@ -20,7 +21,7 @@ const NoteDashboard = ({ onCreateNote,onViewNote,setnoteId }) => {
                 <span className={` text-sm relative left-95 cursor-pointer font-bold  ${isDark ? "text-white" : "text-violet-700"}`}>See all</span>
                 <button
                     type="button"
-                    onClick={() => { console.log("PLUS CLICKED"); onCreateNote() }}
+                    onClick={() => { onCreateNote() }}
                     className={`relative z-[9999] flex h-10 w-10 cursor-pointer top-20 right-1 items-center justify-center rounded-full border text-3xl
                      ${isDark
                             ? "border-violet-200 bg-violet-950 text-white"

@@ -1,15 +1,19 @@
-import { useNavigate } from "react-router-dom";
-import { useAuth } from "../../hooks/useAuth";
-import { useTheme } from "../../hooks/useTheme";
-
-const Sidebar = (themeStyles) => {
-    const navigate = useNavigate();
+import React from 'react'
+import { useAuth } from '../hooks/useAuth';
+import { useTheme } from '../hooks/useTheme';
+import { useNavigate } from 'react-router-dom';
+import {RiAddLine, RiDashboardFill} from '@remixicon/react'
+const Mobileavbar = ({setShowCreateNote}) => {
+       const navigate = useNavigate();
 
     const { logout, profile, user } = useAuth();
     const { theme, changeTheme } = useTheme();
 
     const isDark = theme === "dark";
 
+    const textStyle = isDark
+        ? "text-white"
+        : "text-violet-700";
 
     const handleLogout = async () => {
         console.log("click")
@@ -28,42 +32,34 @@ const Sidebar = (themeStyles) => {
     const handleTheme = () => {
         changeTheme();
     };
-
-    return (
-        <aside className={`row-start-3 hidden  text-sm relative  w-full 
-            sm:row-start-1 sm:col-start-1 sm:row-span-3 sm:block sm:h-full ${themeStyles}`}>
-            <div className="flex text-xl items-center h-full   py-5  justify-between sm:flex-col gap-2">
+  return (
+    <div className="w-full h-12 px-2     bottom-0 absolute
+                     sm:hidden"
+    >
+         <div className="flex text-xl items-center h-full   py-5  justify-between sm:flex-col gap-2">
                 <button
                     type="button"
                     onClick={handleDashboard}
-                    className={`cursor-pointer text-left `}
-                >
-                    Dashboard
-                </button>
-
-                <button
-                    type="button"
-                    onClick={handleProfile}
                     className={`cursor-pointer text-left font-semibold `}
                 >
-                    Profile
+                 <RiDashboardFill/>
                 </button>
-
                 <button
                     type="button"
-                    onClick={handleTheme}
+                   onClick={() => setShowCreateNote(true)}
                     className={`cursor-pointer text-left font-semibold `}
                 >
-                    {isDark ? "Dark" : "Light"}
+                 <RiAddLine/>
                 </button>
+                
                 <button
                     type="button"
                     onClick={handleLogout}
-                    className={`cursor-pointer sm:block hidden text-left font-semibold `}
+                    className={`cursor-pointer sm:block hidden text-left font-semibold ${textStyle}`}
                 >
                     Logout
                 </button>
-                <div onClick={handleProfile} className="items-center bg-blue-500 justify-center h-8 w-8 
+                <div onClick={handleProfile} className="items-center  justify-center h-8 w-8 
                                                         sm:hidden
                                      ">
                     <img
@@ -75,8 +71,8 @@ const Sidebar = (themeStyles) => {
                 
             </div>
 
-        </aside>
-    );
-};
+     </div>
+  )
+}
 
-export default Sidebar;
+export default Mobileavbar

@@ -4,10 +4,14 @@ import { useTheme } from '../hooks/useTheme';
 import { useNote } from '../hooks/useNote';
 import { useAuth } from '../hooks/useAuth';
 const Note = ({ onClose, noteId, themeStyles }) => {
-    const { createNote, note, updateNote,allNote } = useNote()
+    const { createNote, note, updateNote, allNote } = useNote()
     const { theme } = useTheme()
     const { user } = useAuth()
-    const selectedNote = allNote.find((e) => e._id === noteId);
+    const selectedNote = note.find((e) => e._id === noteId);
+    if(!selectedNote){
+        const selectedNote = allNote.find((e) => e._id === noteId);
+
+    }
     const validUser = selectedNote?.owner === user?._id;
     const [form, setForm] = useState({
         title: ``,
@@ -43,7 +47,7 @@ const Note = ({ onClose, noteId, themeStyles }) => {
         }
     };
     return (
-        <form onSubmit={handleSubmit} className={`z-[99]  left-1/2 top-30  -translate-x-1/2 -translate-y-1/2" absolute p-3 rounded-2xl w-80  ${themeStyles} `} action="">
+        <form onSubmit={handleSubmit} className={`z-[99]  left-1/2 sm:top-30 top-70 -translate-x-1/2 -translate-y-1/2" absolute p-3 rounded-2xl w-80  ${themeStyles} `} action="">
             <input
                 className={`outline-none w-[92%] border-b h-10 text-2xl `}
                 name="title"
@@ -64,17 +68,17 @@ const Note = ({ onClose, noteId, themeStyles }) => {
             <div className="flex px-2 justify-between w-full">
                 {validUser ? (
                     <select
-                    name="visibility"
-                    value={form.visibility}
-                    onChange={handleChange}
-                    className="rounded-lg cursor-pointeroutline-none"
-                >
-                    <option className='text-blue-800 cursor-pointer' value="private">Private</option>
-                    <option className='text-blue-800 cursor-pointer' value="public">Public</option>
-                </select>
+                        name="visibility"
+                        value={form.visibility}
+                        onChange={handleChange}
+                        className="rounded-lg cursor-pointeroutline-none"
+                    >
+                        <option className='text-blue-800 cursor-pointer' value="private">Private</option>
+                        <option className='text-blue-800 cursor-pointer' value="public">Public</option>
+                    </select>
 
-                ):<h1>Like</h1>}
-                
+                ) : <h1>Like</h1>}
+
                 {validUser ? (
                     <button className="py-2 px-4 rounded-4xl cursor-pointer">
                         Update
