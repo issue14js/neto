@@ -3,7 +3,7 @@ import { useAuth } from '../hooks/useAuth';
 import { useTheme } from '../hooks/useTheme';
 import { useNavigate } from 'react-router-dom';
 import {RiAddLine, RiDashboardFill} from '@remixicon/react'
-const Mobileavbar = ({setShowCreateNote}) => {
+const Mobileavbar = ({onCreateNote, themeStyles }) => {
        const navigate = useNavigate();
 
     const { logout, profile, user } = useAuth();
@@ -33,8 +33,8 @@ const Mobileavbar = ({setShowCreateNote}) => {
         changeTheme();
     };
   return (
-    <div className="w-full h-12 px-2     bottom-0 absolute
-                     sm:hidden"
+    <div className={`w-full h-12 px-2  ${themeStyles} bottom-0 absolute
+                     sm:hidden`}
     >
          <div className="flex text-xl items-center h-full   py-5  justify-between sm:flex-col gap-2">
                 <button
@@ -46,7 +46,7 @@ const Mobileavbar = ({setShowCreateNote}) => {
                 </button>
                 <button
                     type="button"
-                   onClick={() => setShowCreateNote(true)}
+                   onClick={() => { onCreateNote() }}
                     className={`cursor-pointer text-left font-semibold `}
                 >
                  <RiAddLine/>

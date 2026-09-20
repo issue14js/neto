@@ -23,7 +23,9 @@ const Profile = ({ setShowCreateNote,themeStyles, setnoteId, onViewNote }) => {
             <ProfileInfo/>
             {/* Sidebar */}
             <Sidebar />
-             <Mobileavbar setShowCreateNote={setShowCreateNote} />
+             <Mobileavbar 
+             themeStyles={themeStyles} 
+               onCreateNote={setShowCreateNote} />
                 <Post setnoteId ={setnoteId} onViewNote={onViewNote} />
         </div>
     );

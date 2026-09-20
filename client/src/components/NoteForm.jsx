@@ -34,7 +34,7 @@ const handleSubmit = async (e) => {
     }
 };
   return (
-    <form onSubmit={handleSubmit} className={`z-[99]   left-1/2 top-30 bg-amber-600 -translate-x-1/2 -translate-y-1/2" absolute p-3 rounded-2xl w-80  ${themeStyles} ` } action="">
+    <form onSubmit={handleSubmit} className={`z-[99]   left-1/2 SM:top-30 top-70  bg-amber-600 -translate-x-1/2 -translate-y-1/2" absolute p-3 rounded-2xl w-80  ${themeStyles} ` } action="">
        <input
     className={`outline-none w-[92%] border-b h-10 text-2xl `}
     name="title"

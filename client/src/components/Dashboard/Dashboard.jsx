@@ -11,9 +11,9 @@ import Mobileavbar from "../Mobileavbar";
 
 const Dashboard = ({onViewNote,setShowCreateNote,showCreateNote, setviewNote,setnoteId,themeStyles}) => {
     const { getnote } = useNote();  
-    const handleCreateNote = () => {
-    setShowCreateNote(true);
- };
+//     const handleCreateNote = () => {
+//     setShowCreateNote(true);
+//  };
 
     useEffect(() => {
         getnote();
@@ -27,9 +27,7 @@ const Dashboard = ({onViewNote,setShowCreateNote,showCreateNote, setviewNote,set
             <FeedDashboard onViewNote={()=> {setviewNote(true)}} setnoteId={setnoteId}  />
             <NoteDashboard onCreateNote={ setShowCreateNote} onViewNote={()=> {setviewNote(true)}} setnoteId={setnoteId} />
             <TemplateDashboard/>
-            {showCreateNote && (
-             <NoteForm onClose={() => setShowCreateNote(false)}/> )} 
-             <Mobileavbar/>
+             <Mobileavbar onCreateNote={ setShowCreateNote}/>
         </div>
        
     );

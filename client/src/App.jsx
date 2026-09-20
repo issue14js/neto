@@ -9,6 +9,7 @@ import ProtectedRoute from './components/ProtectedRoute'
 import { useTheme } from './hooks/useTheme'
 import Profile from './components/Profile'
 import Note from './components/Note'
+import NoteForm from './components/NoteForm'
 
 
 
@@ -16,7 +17,7 @@ const App = () => {
   const { theme } = useTheme();
   const [viewNote, setviewNote] = useState(false)
   const [noteId, setnoteId] = useState(null)
-   const [showCreateNote, setShowCreateNote] = useState(false);  
+  const [showCreateNote, setShowCreateNote] = useState(false);
   const isDark = theme === "dark";
   const themeStyles = isDark
     ? "border-violet-400/20 bg-gradient-to-br from-violet-900 via-indigo-950 to-slate-900 text-white"
@@ -26,17 +27,29 @@ const App = () => {
     <div className={` h-screen w-full flex justify-center items-center ${themeStyles}`}>
       <Routes>
         <Route path='/' element={<Home themeStyles={themeStyles} />} />
-        <Route path='/profile' element={<ProtectedRoute> <Profile setShowCreateNote={()=>setShowCreateNote(true)} themeStyles={themeStyles}  setnoteId = {setnoteId} onViewNote={() => setviewNote(true)}/></ProtectedRoute>} />
+        <Route
+          path="/profile"
+          element={
+            <ProtectedRoute>
+              <Profile
+                setShowCreateNote={() => setShowCreateNote(true)}
+                themeStyles={themeStyles}
+                setnoteId={setnoteId}
+                onViewNote={() => setviewNote(true)}
+              />
+            </ProtectedRoute>
+          }
+        />
         <Route
           path="/dashboard"
           element={
             <ProtectedRoute>
               <Dashboard
-              setShowCreateNote={()=>setShowCreateNote(true)}
-              showCreateNote={showCreateNote}
+                setShowCreateNote={() => setShowCreateNote(true)}
+                showCreateNote={showCreateNote}
                 themeStyles={themeStyles}
-                setnoteId = {setnoteId}
-                setviewNote={()=>setviewNote(true)}
+                setnoteId={setnoteId}
+                setviewNote={() => setviewNote(true)}
                 onViewNote={() => setviewNote(true)}
               />
             </ProtectedRoute>
@@ -47,7 +60,9 @@ const App = () => {
       </Routes>
       {/* <Note/> */}
       {viewNote && (
-        <Note onClose={() => setviewNote(false)} noteId ={noteId} themeStyles={themeStyles}/>)}
+        <Note onClose={() => setviewNote(false)} noteId={noteId} themeStyles={themeStyles} />)}
+      {showCreateNote && (
+        <NoteForm onClose={() => setShowCreateNote(false)} />)}
     </div>
   )
 }

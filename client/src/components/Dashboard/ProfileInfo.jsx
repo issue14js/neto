@@ -1,23 +1,25 @@
 import React from 'react'
 import { useAuth } from '../../hooks/useAuth'
 import { useTheme } from '../../hooks/useTheme'
+import { useNote } from '../../hooks/useNote'
 import Post from './Post'
 
 const ProfileInfo = ({ themeStyles = "" }) => {
     const {user} = useAuth()
     const {theme,changeTheme} = useTheme()
+    const {note} = useNote()
     const  ThemeChange =()=>{
         changeTheme()
     }
     
   return (
-            <main className="order-1  p-4 overflow-hidden h-85 sm:h-70 ">
+            <main className="order-1  p-4 overflow-hidden h-80 sm:h-70 ">
                 
                 <div className="flex flex-col sm:gap-5 gap-2 sm:flex-row">
                     {/* <button className='bg-blue-900 absolute top- '>DARK </button> */}
 
                     {/* Avatar */}
-                    <div className="mx-auto h-28 w-28 shrink-0 overflow-hidden  border-4  sm:mx-0 sm:h-50 sm:w-50">
+                    <div className="mx-auto h-25 w-25 shrink-0 overflow-hidden  border-4  sm:mx-0 sm:h-50 sm:w-50">
                         <img
                             src={user?.avatar}
                             alt="Avatar"
@@ -45,7 +47,7 @@ const ProfileInfo = ({ themeStyles = "" }) => {
                                 <h2 className="text-sm font-semibold sm:text-xl">
                                     Posts
                                 </h2>
-                                <p>00</p>
+                                <p>{theme.length}</p>
                             </div>
 
                             <div className="text-center">
