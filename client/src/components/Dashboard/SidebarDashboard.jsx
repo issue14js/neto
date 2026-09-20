@@ -1,6 +1,7 @@
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "../../hooks/useAuth";
 import { useTheme } from "../../hooks/useTheme";
+import { RiDashboardFill, RiLogoutBoxLine,RiDrizzleFill,RiSunLine } from "@remixicon/react";
 
 const Sidebar = (themeStyles) => {
     const navigate = useNavigate();
@@ -38,15 +39,7 @@ const Sidebar = (themeStyles) => {
                     onClick={handleDashboard}
                     className={`cursor-pointer text-left `}
                 >
-                    Dashboard
-                </button>
-
-                <button
-                    type="button"
-                    onClick={handleProfile}
-                    className={`cursor-pointer text-left font-semibold `}
-                >
-                    Profile
+                     <RiDashboardFill/> 
                 </button>
 
                 <button
@@ -54,14 +47,14 @@ const Sidebar = (themeStyles) => {
                     onClick={handleTheme}
                     className={`cursor-pointer text-left font-semibold `}
                 >
-                    {isDark ? "Dark" : "Light"}
+                    {isDark ? <RiDrizzleFill /> : <RiSunLine />}
                 </button>
                 <button
                     type="button"
                     onClick={handleLogout}
                     className={`cursor-pointer sm:block hidden text-left font-semibold `}
                 >
-                    Logout
+                    <RiLogoutBoxLine />
                 </button>
                 <div onClick={handleProfile} className="items-center bg-blue-500 justify-center h-8 w-8 
                                                         sm:hidden

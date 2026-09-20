@@ -1,4 +1,5 @@
 import noteModel from "../model/noteModel.js";
+import userModel from '../model/authModel.js'
 
 async function createNote(req, res) {
     try {
@@ -34,7 +35,6 @@ async function createNote(req, res) {
     }
 }
 
-
 async function getNote(req, res) {
     try {
         const user = req.user;
@@ -45,15 +45,15 @@ async function getNote(req, res) {
             });
         }
 
-        // Current user's notes
+        // Current user's private + public notes
         const note = await noteModel.find({
             owner: user._id
-        });
+        }).populate("owner", "username avatar");
 
-        // DB ke saare public notes
+        // Sabhi users ke public notes
         const allNote = await noteModel.find({
             visibility: "public"
-        });
+        }).populate("owner", "username avatar");
 
         return res.status(200).json({
             message: "Notes fetched successfully",

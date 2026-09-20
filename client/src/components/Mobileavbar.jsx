@@ -42,7 +42,7 @@ const Mobileavbar = ({onCreateNote, themeStyles }) => {
                     onClick={handleDashboard}
                     className={`cursor-pointer text-left font-semibold `}
                 >
-                 <RiDashboardFill/>
+                 <RiDashboardFill/>  
                 </button>
                 <button
                     type="button"

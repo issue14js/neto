@@ -23,25 +23,32 @@ export function NoteProvider({ children }) {
 
     }
 
-    const getnote = async (formData) => {
+    const getnote = async () => {
         try {
-            const res = await axios.get(`${rooturl}/api/note/`, { withCredentials: true })
+            const res = await axios.get(
+                `${rooturl}/api/note/`,
+                { withCredentials: true }
+            );
+
+            // console.log("API DATA:", res.data);
+
             setnote(res.data.note);
             setallNote(res.data.allNote);
-            return res.data
+
+            return res.data;
         } catch (err) {
-            console.log("Error", err)
-            throw err
+            console.log("Error", err);
+            throw err;
         }
-    }
-    const updateNote = async(formData)=>{
-        try{
-            const res = await axios.put(`${rooturl}/api/note/update`,formData,{
+    };
+    const updateNote = async (formData) => {
+        try {
+            const res = await axios.put(`${rooturl}/api/note/update`, formData, {
                 withCredentials: true
             })
             await getnote()
-        }catch(err){
-            console.log("Error",err)
+        } catch (err) {
+            console.log("Error", err)
             throw err
         }
     }
@@ -52,7 +59,7 @@ export function NoteProvider({ children }) {
 
     return (
         <NoteContext.Provider
-            value={{ note,allNote, createNote,getnote,updateNote }}>
+            value={{ note, allNote, createNote, getnote, updateNote }}>
             {children}
         </NoteContext.Provider>
     )
