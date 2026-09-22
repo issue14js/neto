@@ -6,9 +6,15 @@ import ProfileInfo from "./Dashboard/ProfileInfo";
 import Post from "./Dashboard/Post";
 import Mobileavbar from "./Mobileavbar";
 
-const Profile = ({ setShowCreateNote,themeStyles, setnoteId, onViewNote }) => {
+const Profile = ({ setShowCreateNote, themeStyles, owner, setnoteId, onViewNote }) => {
     const { user } = useAuth();
-    const { getnote } = useNote();
+    const { getnote,allNote } = useNote();
+
+    const profileowner = owner ?? user;
+    const ownerNote = allNote.filter(
+        (e) => e.owner._id === profileowner._id
+    );
+
 
     useEffect(() => {
         getnote();
@@ -20,13 +26,13 @@ const Profile = ({ setShowCreateNote,themeStyles, setnoteId, onViewNote }) => {
             flex flex-col
             sm:grid sm:grid-cols-[12%_88%] `}
         >
-            <ProfileInfo/>
+            <ProfileInfo profileowner={profileowner} ownerNote={ownerNote} />
             {/* Sidebar */}
             <Sidebar />
-             <Mobileavbar 
-             themeStyles={themeStyles} 
-               onCreateNote={setShowCreateNote} />
-                <Post setnoteId ={setnoteId} onViewNote={onViewNote} />
+            <Mobileavbar
+                themeStyles={themeStyles}
+                onCreateNote={setShowCreateNote} />
+            <Post setnoteId={setnoteId} profileowner={profileowner} ownerNote={ownerNote} onViewNote={onViewNote} />
         </div>
     );
 };

@@ -5,7 +5,7 @@ import { useNote } from '../../hooks/useNote'
 import {RiDrizzleFill,RiSunLine} from '@remixicon/react'
 import Post from './Post'
 
-const ProfileInfo = ({ themeStyles = "" }) => {
+const ProfileInfo = ({ profileowner,ownerNote, themeStyles = "" }) => {
     const { user } = useAuth()
     const { theme, changeTheme } = useTheme()
     const { note } = useNote()
@@ -17,16 +17,16 @@ const ProfileInfo = ({ themeStyles = "" }) => {
 
 
 
+
     return (
         <main className="order-1  p-4 overflow-hidden h-80 sm:h-70 ">
 
             <div className="flex flex-col sm:gap-5 gap-2 sm:flex-row">
-                {/* <button className='bg-blue-900 absolute top- '>DARK </button> */}
 
                 {/* Avatar */}
                 <div className="mx-auto h-25 w-25 shrink-0 overflow-hidden  border-4  sm:mx-0 sm:h-50 sm:w-50">
                     <img
-                        src={user?.avatar}
+                        src={profileowner?.avatar}
                         alt="Avatar"
                         className="h-full w-full object-cover"
                     />
@@ -37,11 +37,11 @@ const ProfileInfo = ({ themeStyles = "" }) => {
 
                     <div className="text-center sm:text-left">
                         <h1 className="truncate text-3xl font-bold sm:text-5xl lg:text-7xl">
-                            {user?.username || "Guest"} <button onClick={ThemeChange} className='text-xl'> {isDark ? <RiDrizzleFill /> : <RiSunLine />}</button>
+                            {profileowner?.username || "Guest"} <button onClick={ThemeChange} className='text-xl'> {isDark ? <RiDrizzleFill /> : <RiSunLine />}</button>
                         </h1>
 
                         <p className="text-sm sm:text-xl">
-                            anshu
+                            profileowner.name
                         </p>
                     </div>
 
@@ -52,7 +52,7 @@ const ProfileInfo = ({ themeStyles = "" }) => {
                             <h2 className="text-sm font-semibold sm:text-xl">
                                 Posts
                             </h2>
-                            <p>{theme.length}</p>
+                            <p>{ownerNote.length}</p>
                         </div>
 
                         <div className="text-center">

@@ -4,7 +4,8 @@ import { useTheme } from "../../hooks/useTheme";
 import { useNote } from "../../hooks/useNote";
 import BannerDashboard from "./BannerDashboard";
 import { useState } from "react";
-const DashboardNavbar = ({ themeStyles, onViewNote, setnoteId}) => {
+import {RiNotification4Line} from '@remixicon/react'
+const DashboardNavbar = ({ setOwner, themeStyles, onViewNote, setnoteId}) => {
     const { user } = useAuth();
     const { theme } = useTheme();
     const { allNote } = useNote()
@@ -13,6 +14,7 @@ const DashboardNavbar = ({ themeStyles, onViewNote, setnoteId}) => {
     const Navigate = useNavigate()
 
     const handelProfile = (() => {
+        setOwner(null)
         Navigate('/profile')
 
     })
@@ -24,8 +26,6 @@ const DashboardNavbar = ({ themeStyles, onViewNote, setnoteId}) => {
         setnoteId(id)
         onViewNote()
     })
-
-    // console.log(searchNoteInput)
     return (
         <div className={`row-start-1 p-2  sm:col-start-2 sm:col-span-7 h-full sm:row-start-1   gap-3 ${themeStyles}`}>
             {/* Search */}
@@ -68,10 +68,10 @@ const DashboardNavbar = ({ themeStyles, onViewNote, setnoteId}) => {
                     {/* Notification */}
                     <button
                         type="button"
-                        className="cursor-pointer mr-5"
+                        className="cursor-pointer flex items-center mr-5"
                         aria-label="Notifications"
                     >
-                        🔔
+                        <RiNotification4Line />
                     </button>
                 </div>
             </div>

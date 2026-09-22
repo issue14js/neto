@@ -14,10 +14,7 @@ const FeedDashboard = ({onViewNote,setnoteId}) => {
          const NoteView = ((id)=>{
             setnoteId(id)
             onViewNote()
-
-
     })
-    // console.log(allNote)
 
     return (
         <div className="flex min-h-0 flex-col overflow-hidden rounded-xl sm:col-start-7 sm:col-span-2 sm:row-start-2 sm:row-span-2">
@@ -31,7 +28,6 @@ const FeedDashboard = ({onViewNote,setnoteId}) => {
     <div className="flex min-h-0 flex-1 flex-col gap-1 overflow-y-auto p-1 scrollbar-none sm:scrollbar-thin sm:scrollbar-track-transparent sm:scrollbar-thumb-gray-400">
         {allNote.map((note) => {
             const owner = note.owner
-            // console.log("owner",owner)
             return <div
                 onClick={()=>{NoteView(note._id)}}
                 key={note._id} 

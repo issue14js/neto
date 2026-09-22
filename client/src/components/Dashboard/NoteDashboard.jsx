@@ -2,6 +2,7 @@ import React from 'react'
 import { useState } from "react";
 import { useTheme } from "../../hooks/useTheme";
 import { useNote } from "../../hooks/useNote";
+import {RiAddLine} from '@remixicon/react'
 import Note from '../Note';
 
 const NoteDashboard = ({ onCreateNote,onViewNote,setnoteId }) => {
@@ -27,7 +28,7 @@ const NoteDashboard = ({ onCreateNote,onViewNote,setnoteId }) => {
                             ? "border-violet-200 bg-violet-950 text-white"
                             : "border-violet-400 bg-violet-950 text-white"
                         }`}
-                >+ </button>
+                ><RiAddLine/></button>
             </div>
             <div
                 onWheel={(e) => {

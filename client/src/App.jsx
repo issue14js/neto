@@ -18,6 +18,7 @@ const App = () => {
   const [viewNote, setviewNote] = useState(false)
   const [noteId, setnoteId] = useState(null)
   const [showCreateNote, setShowCreateNote] = useState(false);
+  const [owner, setOwner] = useState(null)
   const isDark = theme === "dark";
   const themeStyles = isDark
     ? "border-violet-400/20 bg-gradient-to-br from-violet-900 via-indigo-950 to-slate-900 text-white"
@@ -36,6 +37,7 @@ const App = () => {
                 themeStyles={themeStyles}
                 setnoteId={setnoteId}
                 onViewNote={() => setviewNote(true)}
+                owner ={owner}
               />
             </ProtectedRoute>
           }
@@ -45,6 +47,7 @@ const App = () => {
           element={
             <ProtectedRoute>
               <Dashboard
+              setOwner={setOwner}
                 setShowCreateNote={() => setShowCreateNote(true)}
                 showCreateNote={showCreateNote}
                 themeStyles={themeStyles}
@@ -60,7 +63,7 @@ const App = () => {
       </Routes>
       {/* <Note/> */}
       {viewNote && (
-        <Note onClose={() => setviewNote(false)} noteId={noteId} themeStyles={themeStyles} />)}
+        <Note onClose={() => setviewNote(false)} setOwner={setOwner} noteId={noteId} themeStyles={themeStyles} />)}
       {showCreateNote && (
         <NoteForm onClose={() => setShowCreateNote(false)} />)}
     </div>

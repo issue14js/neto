@@ -51,14 +51,6 @@ const Mobileavbar = ({onCreateNote, themeStyles }) => {
                 >
                  <RiAddLine/>
                 </button>
-                
-                <button
-                    type="button"
-                    onClick={handleLogout}
-                    className={`cursor-pointer sm:block hidden text-left font-semibold ${textStyle}`}
-                >
-                    Logout
-                </button>
                 <div onClick={handleProfile} className="items-center  justify-center h-8 w-8 
                                                         sm:hidden
                                      ">

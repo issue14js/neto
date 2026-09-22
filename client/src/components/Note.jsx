@@ -4,10 +4,12 @@ import { useTheme } from '../hooks/useTheme';
 import { useNote } from '../hooks/useNote';
 import { useAuth } from '../hooks/useAuth';
 import {RiDeleteBack2Line} from '@remixicon/react'
-const Note = ({ onClose, noteId, themeStyles }) => {
+import { useNavigate } from 'react-router-dom';
+const Note = ({ onClose, noteId, themeStyles,setOwner }) => {
     const { createNote, note, updateNote, allNote } = useNote()
     const { theme } = useTheme()
     const { user } = useAuth()
+    const Navigate = useNavigate()
     const selectedNote =
         note.find((e) => String(e._id) === String(noteId)) ||
         allNote.find((e) => String(e._id) === String(noteId));
@@ -15,8 +17,7 @@ const Note = ({ onClose, noteId, themeStyles }) => {
         const selectedNote = allNote.find((e) => e._id === noteId);
 
     }
-    // console.log(selectedNote)
-    const validUser = selectedNote?.owner === user?._id;
+    const validUser = selectedNote?.owner._id === user?._id;
     const [form, setForm] = useState({
         title: ``,
         content: ``,
@@ -50,12 +51,21 @@ const Note = ({ onClose, noteId, themeStyles }) => {
             console.log(err);
         }
     };
+    const handelClose = ()=>{
+        onClose()
+    }
+    const handelProfile = ()=>{
+      setOwner(selectedNote.owner)
+      Navigate('/profile')
+      handelClose()
+
+    }
     return (
         <form onSubmit={handleSubmit} className={`z-[99]  overflow-hidden  left-1/2 sm:top-30 top-70 -translate-x-1/2 -translate-y-1/2" absolute p-3 rounded-2xl w-80  ${themeStyles} `} action="">
             <div className=" flex items-center gap-2 h-10">
-                <img className='h-full w-10 rounded-full ' src={selectedNote.owner.avatar} alt="" />
-                <h1 className='text-2xl '>{selectedNote.owner.username}</h1>
-                <button type='button' onClick={onClose} className=' relative left-40 cursor-pointer text-2xl mr-2'><RiDeleteBack2Line /></button>
+                <img onClick={handelProfile}  className='h-full w-10 rounded-full ' src={selectedNote.owner.avatar} alt="" />
+                <h1 onClick={handelProfile} className='text-2xl '>{selectedNote.owner.username}</h1>
+                <button type='button' onClick={handelClose} className=' relative left-40 cursor-pointer text-2xl mr-2'><RiDeleteBack2Line /></button>
 
             </div>
             <input
