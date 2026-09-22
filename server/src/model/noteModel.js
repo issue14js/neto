@@ -22,12 +22,21 @@ const noteSchema = new mongoose.Schema({
         type: mongoose.Schema.Types.ObjectId,
         ref: "User",
         required: true
-    }
+    },
+    likes: [{
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "User"
+    }],
+
+    saves: [{
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "User"
+    }]
 
 }, {
     timestamps: true
 });
 
 
-const noteModel = mongoose.model("Note",noteSchema)
+const noteModel = mongoose.model("Note", noteSchema)
 export default noteModel

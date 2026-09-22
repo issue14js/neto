@@ -53,13 +53,45 @@ export function NoteProvider({ children }) {
         }
     }
 
+    const likeUpdate = async (data) => {
+        try {
+            console.log("1. data:", data);
+            const response = await axios.put(
+                `${rooturl}/api/note/${data}/like`,
+                {},
+                { withCredentials: true }
+            )
+            // console.log("2. response:", response);
+            // console.log("3. response data:", response.data);
+            return response.data
+        } catch (err) {
+            console.log(" ERROR:", err);
+            console.log(" SERVER:", err.response?.data);
+        }
+    }
+
+    const saveUpdate = async (data) => {
+        try {
+            const response = await axios.put(
+                `${rooturl}/api/note/${data}/save`,
+                {},
+                { withCredentials: true }
+            )
+            return response.data
+        } catch (err) {
+            console.log(" ERROR:", err);
+            console.log(" SERVER:", err.response?.data);
+
+        }
+    }
+
 
 
 
 
     return (
         <NoteContext.Provider
-            value={{ note, allNote, createNote, getnote, updateNote }}>
+            value={{ note, allNote, createNote, getnote, updateNote, likeUpdate,saveUpdate }}>
             {children}
         </NoteContext.Provider>
     )
